@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  scroll-behavior: smooth;
+}
+.glass-card {
+  backdrop-filter: blur(12px) saturate(1.2);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 24px 0 rgba(19, 173, 199, 0.13);
+}
+.dark .glass-card {
+  background: rgba(35, 41, 70, 0.8);
+}
+@keyframes animated-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: animated-gradient 9s ease-in-out infinite;
+}
