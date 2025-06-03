@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import ContactDrawer from "./components/ContactDrawer";
 import ScrollToTop from "./components/ScrollToTop";
+import Skills from "./pages/Skills";
 
 export default function App() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function App() {
         <Home />
         <About />
         <Projects />
+        <Skills />
         <Blog />
       </main>
       <Footer />
