@@ -98,14 +98,7 @@ export default function Home() {
 
       {/* Main Content - centered */}
       <div className="flex flex-col items-center justify-center w-full text-center z-10">
-        <Tilt
-          tiltMaxAngleX={10}
-          tiltMaxAngleY={10}
-          glareEnable={true}
-          glareMaxOpacity={0.15}
-          glareColor="#13adc7"
-          className="w-full"
-        >
+        <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} className="w-full">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -123,7 +116,7 @@ export default function Home() {
             className="text-lg md:text-2xl mb-10 text-dark dark:text-primary font-semibold text-center"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Software Developer | Front-End Developer
+            Software Developer | Full Stack Developer
           </motion.p>
           <motion.a
             href="#about"
