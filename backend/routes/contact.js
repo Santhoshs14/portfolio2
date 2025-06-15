@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
         const [rows] = await pool.query('SELECT * FROM contacts ORDER BY created_at DESC');
         res.json(rows);
     } catch (err) {
+        console.error('Error saving contact message:', err);
         res.status(500).json({ error: 'Database error' });
     }
 });
