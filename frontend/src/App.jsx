@@ -18,7 +18,7 @@ export default function App() {
       <Navbar onContactClick={() => setContactOpen(true)} />
       <main className="pt-24 flex-grow">
         <Home />
-        <About />
+        <About onContactClick={() => setContactOpen(true)} />
         <Projects />
         <Skills />
         <Blog />

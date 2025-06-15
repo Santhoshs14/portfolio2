@@ -5,12 +5,12 @@ html {
   scroll-behavior: smooth;
 }
 .glass-card {
-  backdrop-filter: blur(12px) saturate(1.2);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.86);
   box-shadow: 0 2px 24px 0 rgba(19, 173, 199, 0.13);
+  backdrop-filter: blur(8px) saturate(1.03);
 }
 .dark .glass-card {
-  background: rgba(35, 41, 70, 0.8);
+  background: rgba(35, 41, 70, 0.84);
 }
 @keyframes animated-gradient {
   0% {

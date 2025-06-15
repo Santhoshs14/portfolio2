@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
 
 export default function Home() {
   // For Particles.js config
@@ -91,7 +90,6 @@ export default function Home() {
       {/* Floating Particles */}
       <Particles
         id="tsparticles"
-        init={particlesInit}
         options={particlesOptions}
         className="absolute inset-0 w-full h-full pointer-events-none -z-10"
       />
