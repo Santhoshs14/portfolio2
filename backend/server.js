@@ -5,7 +5,14 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(cors({ origin: "https://santhoshs14.vercel.app" })); // Change if needed
+app.use(cors({
+    origin: [
+        "https://santhoshs14.vercel.app",
+        "http://localhost:5173"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+})); // Change if needed
 app.use(express.json());
 app.use('/api/contact', contactRoutes);
 
