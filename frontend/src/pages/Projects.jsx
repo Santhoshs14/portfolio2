@@ -1,164 +1,325 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dialog } from "@headlessui/react";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import intelliprepImg from "../assets/intelliprep.png";
+import nutrigenieImg from "../assets/nutrigenie.png";
+import rentsphereImg from "../assets/rentsphere.png";
 
-const projectData = [
+const projects = [
   {
-    title: "Enterprise Task & Project Management System",
+    title: "IntelliPrep.AI",
+    tags: ["AI", "Full Stack", "React", "Node.js", "Express", "PostgreSQL"],
     description:
-      "Full-stack platform for real-time task tracking, dashboards, and team collaboration.",
-    stack: ["React.js", "Spring Boot", "JWT", "Redux", "Docker", "AWS"],
-    details:
-      "Developed with secure JWT authentication, real-time dashboards, and microservices deployed on AWS EC2/RDS. Extensive tests and documentation included.",
-    link: "#",
+      "AI-powered platform for tailored interview questions, coding challenges, and instant GPT feedback. Features adaptive dashboards and real user progress tracking.",
+    github: "https://github.com/Santhoshs14/intelliprep-ai", // Update if you have the real repo
+    demo: "", // Add live demo if available
+    cover: intelliprepImg,
+    details: [
+      "Tailored interview questions & coding challenges using Node.js, Express, and OpenAI GPT APIs.",
+      "Instant AI-generated feedback to improve candidate readiness.",
+      "Adaptive difficulty, user tracking, and analytics dashboard with React and PostgreSQL.",
+    ],
   },
   {
-    title: "Inventory & Order Management System",
+    title: "NutriGenie",
+    tags: ["LLM", "RAG", "AI", "Python", "React", "Express"],
     description:
-      "Inventory system with order creation, supplier management, invoicing, and PDF/file uploads.",
-    stack: ["React.js • Express • MySQL • Docker • AWS"],
-    link: "#",
+      "Conversational AI assistant for personalized nutrition, diet, and workout guidance. Built with RAG, LLMs, and a modern React UI.",
+    github: "https://github.com/Santhoshs14/nutrigenie", // Update if available
+    demo: "",
+    cover: nutrigenieImg,
+    details: [
+      "Interactive AI assistant using retrieval-augmented generation with open-source LLMs and real-world data.",
+      "ChatGPT-like conversational interface for user-friendly queries.",
+      "Delivers instant, reliable, and context-aware health advice.",
+    ],
   },
   {
-    title: "Disease Prediction with ML",
+    title: "RentSphere",
+    tags: ["React", "Node.js", "Express", "PostgreSQL"],
     description:
-      "Diabetes prediction system using Python and ML, with 95% accuracy and a user-friendly UI.",
-    stack: ["Python • Machine Learning • Flask"],
-    link: "#",
+      "Full-stack rental management system for tenants and landlords: bookings, payments, agreements, and maintenance tickets—all automated.",
+    github: "https://github.com/Santhoshs14/rentsphere", // Update if available
+    demo: "",
+    cover: rentsphereImg,
+    details: [
+      "Book properties, raise service requests, and manage leases.",
+      "Role-based dashboards for tenants, landlords, and admins.",
+      "Automated agreements, payment logs, and ticket tracking.",
+    ],
   },
-];
-
-const tags = [
-  "All",
-  ...Array.from(new Set(projectData.flatMap((p) => p.stack))),
 ];
 
 export default function Projects() {
-  const [selectedTag, setSelectedTag] = useState("All");
-  const [modal, setModal] = useState(null);
+  const [featuredIdx, setFeaturedIdx] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [modalIdx, setModalIdx] = useState(0);
 
-  const projects =
-    selectedTag === "All"
-      ? projectData
-      : projectData.filter((p) => p.stack.includes(selectedTag));
+  const featured = projects[featuredIdx];
 
   return (
     <section
       id="projects"
-      className="min-h-[80vh] flex flex-col items-center justify-center py-16 relative"
+      className="py-16 min-h-[90vh] bg-primary dark:bg-dark relative overflow-x-hidden"
     >
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="font-script text-4xl md:text-5xl text-accent mb-8"
+        transition={{ duration: 0.7 }}
+        className="font-script text-4xl md:text-5xl text-accent mb-12 text-center"
         style={{ fontFamily: "Pacifico, cursive" }}
       >
         Projects
       </motion.h2>
-      {/* Tag filter */}
-      <div className="flex flex-wrap gap-2 mb-8">
-        {tags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setSelectedTag(tag)}
-            className={`px-4 py-1 rounded-full border-2 border-accent font-medium transition 
-              ${
-                selectedTag === tag
-                  ? "bg-accent text-white shadow"
-                  : "bg-white dark:bg-dark text-accent hover:bg-accent hover:text-white"
-              }`}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-      {/* Cards grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl px-6">
-        {projects.map((proj, idx) => (
+
+      {/* Featured Carousel */}
+      <div className="w-full flex flex-col items-center gap-6 mb-12">
+        <div className="relative w-full max-w-3xl">
           <motion.div
-            key={proj.title}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className="relative group bg-white/80 dark:bg-dark/80 shadow-2xl rounded-3xl p-6 border-2 border-accent overflow-hidden cursor-pointer hover:scale-[1.03] transition-all glass-card"
-            onClick={() => setModal(proj)}
-            tabIndex={0}
-            aria-label={`View details for ${proj.title}`}
+            key={featuredIdx}
+            initial={{ opacity: 0, x: 60, scale: 0.96 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: -60, scale: 0.96 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white/90 dark:bg-[#191d24]/90 rounded-2xl shadow-2xl border border-accent/25 flex flex-col md:flex-row items-center gap-7 p-8"
+            style={{ minHeight: 260 }}
           >
-            <div className="absolute inset-0 pointer-events-none border-4 border-accent rounded-3xl blur-sm opacity-25 group-hover:opacity-40 transition-all"></div>
-            <h3 className="text-xl font-bold mb-2 text-accent">{proj.title}</h3>
-            <p className="mb-4 text-dark dark:text-primary">
-              {proj.description}
-            </p>
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {proj.stack.map((s) => (
-                <span
-                  key={s}
-                  className="bg-accent/10 border border-accent text-accent px-3 py-1 rounded-full text-xs font-bold"
-                >
-                  {s}
-                </span>
-              ))}
+            {/* Image or icon */}
+            <div className="flex-shrink-0">
+              <img
+                src={featured.cover || "/images/project-default.png"}
+                alt={featured.title}
+                className="w-36 h-36 object-cover rounded-xl border-2 border-accent shadow"
+                style={{ background: "#f6f6f6" }}
+                loading="lazy"
+              />
             </div>
-            <div className="absolute bottom-4 right-6 opacity-0 group-hover:opacity-100 transition">
-              <span className="text-accent font-bold underline">
-                See Details
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      {/* Modal */}
-      <AnimatePresence>
-        {modal && (
-          <Dialog
-            open={!!modal}
-            onClose={() => setModal(null)}
-            className="fixed inset-0 z-[99] flex items-center justify-center"
-          >
-            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-white dark:bg-dark rounded-2xl p-8 max-w-lg w-full z-10 border-2 border-accent shadow-xl"
-            >
-              <button
-                onClick={() => setModal(null)}
-                className="absolute top-2 right-3 text-2xl text-accent hover:text-dark dark:hover:text-white"
-                aria-label="Close"
-              >
-                &times;
-              </button>
-              <h3 className="text-2xl font-bold mb-3 text-accent">
-                {modal.title}
+            {/* Info */}
+            <div className="flex-1 flex flex-col items-center md:items-start">
+              <h3 className="text-2xl font-bold text-accent mb-2">
+                {featured.title}
               </h3>
-              <p className="mb-3 text-dark dark:text-primary">
-                {modal.details || modal.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {modal.stack.map((s) => (
+              <div className="flex flex-wrap gap-2 mb-2">
+                {featured.tags.map((tag) => (
                   <span
-                    key={s}
-                    className="bg-accent/10 border border-accent text-accent px-3 py-1 rounded-full text-xs font-bold"
+                    key={tag}
+                    className="px-3 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent border border-accent/20"
                   >
-                    {s}
+                    {tag}
                   </span>
                 ))}
               </div>
-              <a
-                href={modal.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent underline font-bold hover:text-dark dark:hover:text-white transition"
+              <p className="text-dark dark:text-primary mb-3 text-center md:text-left">
+                {featured.description}
+              </p>
+              <div className="flex gap-3">
+                {featured.github && (
+                  <a
+                    href={featured.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-accent font-semibold hover:underline"
+                  >
+                    <FaGithub /> GitHub
+                  </a>
+                )}
+                {featured.demo && (
+                  <a
+                    href={featured.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-accent font-semibold hover:underline"
+                  >
+                    <FaExternalLinkAlt /> Demo
+                  </a>
+                )}
+                <button
+                  onClick={() => {
+                    setShowModal(true);
+                    setModalIdx(featuredIdx);
+                  }}
+                  className="ml-2 px-4 py-1 bg-accent/80 text-white rounded-full font-semibold shadow hover:bg-accent"
+                >
+                  More Info
+                </button>
+              </div>
+            </div>
+          </motion.div>
+          {/* Carousel Controls */}
+          <div className="absolute -left-9 top-1/2 -translate-y-1/2 z-10 hidden md:block">
+            <button
+              onClick={() =>
+                setFeaturedIdx(
+                  (featuredIdx - 1 + projects.length) % projects.length
+                )
+              }
+              className="bg-accent/70 hover:bg-accent text-white p-2 rounded-full shadow"
+              aria-label="Previous"
+            >
+              &lt;
+            </button>
+          </div>
+          <div className="absolute -right-9 top-1/2 -translate-y-1/2 z-10 hidden md:block">
+            <button
+              onClick={() =>
+                setFeaturedIdx((featuredIdx + 1) % projects.length)
+              }
+              className="bg-accent/70 hover:bg-accent text-white p-2 rounded-full shadow"
+              aria-label="Next"
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
+        {/* Dots for carousel */}
+        <div className="flex gap-3 justify-center mt-3">
+          {projects.map((_, i) => (
+            <button
+              key={i}
+              className={`w-3 h-3 rounded-full ${
+                i === featuredIdx ? "bg-accent" : "bg-accent/20"
+              } transition`}
+              onClick={() => setFeaturedIdx(i)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Interactive Card Grid */}
+      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 px-3">
+        {projects.map((p, idx) => (
+          <motion.div
+            key={p.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: idx * 0.07 }}
+            className="relative group bg-white/85 dark:bg-[#191d24]/85 border border-accent/20 rounded-2xl shadow-xl p-5 flex flex-col hover:scale-[1.03] transition-transform cursor-pointer"
+            onClick={() => {
+              setShowModal(true);
+              setModalIdx(idx);
+            }}
+          >
+            <img
+              src={p.cover || "/images/project-default.png"}
+              alt={p.title}
+              className="w-full h-32 object-cover rounded-xl mb-4 border border-accent/20 shadow"
+              loading="lazy"
+            />
+            <div className="font-bold text-lg text-accent mb-1">{p.title}</div>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {p.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2 py-0.5 rounded-full text-xs font-semibold bg-accent/10 text-accent border border-accent/20"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <p className="text-dark dark:text-primary text-sm mb-2">
+              {p.description}
+            </p>
+            <div className="flex gap-2 mt-auto">
+              {p.github && (
+                <a
+                  href={p.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline flex items-center gap-1"
+                >
+                  <FaGithub /> GitHub
+                </a>
+              )}
+              {p.demo && (
+                <a
+                  href={p.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline flex items-center gap-1"
+                >
+                  <FaExternalLinkAlt /> Demo
+                </a>
+              )}
+            </div>
+            <span className="absolute top-2 right-4 text-accent/20 group-hover:text-accent text-2xl pointer-events-none transition">
+              ★
+            </span>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Modal for Project Details */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div
+              className="bg-white dark:bg-[#191d24] rounded-2xl shadow-2xl max-w-lg w-full p-8 relative border-2 border-accent"
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-2 right-3 text-accent text-xl font-bold"
+                onClick={() => setShowModal(false)}
               >
-                View Project
-              </a>
+                &times;
+              </button>
+              <img
+                src={projects[modalIdx].cover || "/images/project-default.png"}
+                alt={projects[modalIdx].title}
+                className="w-full h-36 object-cover rounded-xl mb-4 border border-accent/20 shadow"
+              />
+              <div className="font-bold text-2xl text-accent mb-2">
+                {projects[modalIdx].title}
+              </div>
+              <div className="flex flex-wrap gap-2 mb-2">
+                {projects[modalIdx].tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-0.5 rounded-full text-xs font-semibold bg-accent/10 text-accent border border-accent/20"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <ul className="list-disc list-inside text-dark dark:text-primary mb-3">
+                {projects[modalIdx].details.map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
+              <div className="flex gap-4 mt-3">
+                {projects[modalIdx].github && (
+                  <a
+                    href={projects[modalIdx].github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent font-bold flex items-center gap-1 hover:underline"
+                  >
+                    <FaGithub /> GitHub
+                  </a>
+                )}
+                {projects[modalIdx].demo && (
+                  <a
+                    href={projects[modalIdx].demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent font-bold flex items-center gap-1 hover:underline"
+                  >
+                    <FaExternalLinkAlt /> Demo
+                  </a>
+                )}
+              </div>
             </motion.div>
-          </Dialog>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>

@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Contact({ onSubmitted }) {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
     try {
       const res = await fetch(
         "https://portfolio2-vr6o.onrender.com/api/contact",
@@ -23,9 +28,13 @@ export default function Contact({ onSubmitted }) {
         setSuccess(true);
         setForm({ name: "", email: "", message: "" });
         onSubmitted?.();
+      } else {
+        setError("Could not send your message. Please try again later.");
       }
-    } catch (error) {
-      alert("Something went wrong. Try again!");
+    } catch (err) {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,6 +61,7 @@ export default function Contact({ onSubmitted }) {
           value={form.name}
           onChange={handleChange}
           required
+          disabled={loading}
         />
         <input
           className="p-3 rounded-lg border-2 border-secondary focus:outline-none focus:ring-2 focus:ring-accent font-body text-dark"
@@ -61,6 +71,7 @@ export default function Contact({ onSubmitted }) {
           value={form.email}
           onChange={handleChange}
           required
+          disabled={loading}
         />
         <textarea
           className="p-3 rounded-lg border-2 border-secondary focus:outline-none focus:ring-2 focus:ring-accent font-body text-dark"
@@ -70,16 +81,40 @@ export default function Contact({ onSubmitted }) {
           value={form.message}
           onChange={handleChange}
           required
+          disabled={loading}
         />
         <button
           type="submit"
-          className="bg-accent text-white font-bold py-3 rounded-lg shadow hover:bg-teal-700 transition"
+          className={`bg-accent text-white font-bold py-3 rounded-lg shadow transition
+            ${loading ? "opacity-60 cursor-not-allowed" : "hover:bg-teal-700"}`}
+          disabled={loading}
         >
-          Send Message
+          {loading ? "Sending..." : "Send Message"}
         </button>
-        {success && (
-          <div className="text-green-600 font-bold mt-2">Message sent!</div>
-        )}
+        <AnimatePresence>
+          {success && (
+            <motion.div
+              className="flex items-center justify-center gap-2 text-green-600 font-bold mt-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <FaCheckCircle /> Message sent!
+            </motion.div>
+          )}
+          {error && (
+            <motion.div
+              className="text-red-500 font-semibold mt-2 text-center"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.4 }}
+            >
+              {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </form>
     </div>
   );
