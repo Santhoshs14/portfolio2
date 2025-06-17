@@ -9,7 +9,7 @@ export default function Footer() {
           href="mailto:santhoshs.sivakumar@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent hover:text-dark dark:hover:text-white transition hover:scale-125 transition"
+          className="text-accent hover:text-dark dark:hover:text-white transition hover:scale-125 "
           aria-label="Email"
         >
           <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
@@ -21,7 +21,7 @@ export default function Footer() {
           href="https://linkedin.com/in/santhoshs14"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent hover:text-dark dark:hover:text-white transition hover:scale-125 transition"
+          className="text-accent hover:text-dark dark:hover:text-white transition hover:scale-125 "
           aria-label="LinkedIn"
         >
           <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@ export default function Footer() {
           href="https://github.com/Santhoshs14"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent hover:text-dark dark:hover:text-white transition hover:scale-125 transition"
+          className="text-accent hover:text-dark dark:hover:text-white transition hover:scale-125 "
           aria-label="GitHub"
         >
           <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
