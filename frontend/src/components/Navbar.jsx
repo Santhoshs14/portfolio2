@@ -31,16 +31,16 @@ export default function Navbar({ onContactClick }) {
       ].join(" ")}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
-        <span
+        <a
           href="#home"
-          className="font-script font-extrabold tracking-tight text-accent pl-2 -ml-6 text-3xl md:text-4xl"
+          className="font-script font-extrabold tracking-tight text-accent pl-2 -ml-6 text-3xl md:text-4xl hover:text-dark dark:hover:text-white"
           style={{
             fontFamily: "'Playfair Display', serif",
             letterSpacing: "1px",
           }}
         >
           Santhosh
-        </span>
+        </a>
         <div className="hidden md:flex gap-8 font-script text-lg items-center">
           <a
             href="#about"
