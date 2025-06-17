@@ -36,7 +36,10 @@ export default function Home() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden select-none">
+    <section
+      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden select-none"
+      id="home"
+    >
       {/* Animated Gradient BG Overlay */}
       <div className="absolute inset-0 -z-20 animate-gradient bg-gradient-to-tr from-[#13adc7] via-[#e1bee7] to-[#ffd6e0] opacity-30" />
 
