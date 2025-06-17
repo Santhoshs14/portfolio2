@@ -3,12 +3,12 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
-import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import ContactDrawer from "./components/ContactDrawer";
 import ScrollToTop from "./components/ScrollToTop";
 import Skills from "./pages/Skills";
+import ShowCaseWall from "./pages/ShowCaseWall";
 
 export default function App() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -21,7 +21,7 @@ export default function App() {
         <About onContactClick={() => setContactOpen(true)} />
         <Projects />
         <Skills />
-        <Blog />
+        <ShowCaseWall />
       </main>
       <Footer />
       <ContactDrawer open={contactOpen} onClose={() => setContactOpen(false)}>

@@ -34,11 +34,14 @@ export default function Navbar({ onContactClick }) {
         <span
           href="#home"
           className="font-script font-extrabold tracking-tight text-accent pl-2 -ml-6 text-3xl md:text-4xl"
-          style={{ fontFamily: "Pacifico, cursive", letterSpacing: "1px" }}
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            letterSpacing: "1px",
+          }}
         >
           Santhosh
         </span>
-        <div className="hidden md:flex gap-8 font-body text-lg items-center">
+        <div className="hidden md:flex gap-8 font-script text-lg items-center">
           <a
             href="#about"
             className="transition text-accent hover:text-dark dark:hover:text-white"
@@ -58,10 +61,10 @@ export default function Navbar({ onContactClick }) {
             Skills
           </a>
           <a
-            href="#blog"
+            href="#showcase"
             className="transition text-accent hover:text-dark dark:hover:text-white"
           >
-            Blog
+            Journey
           </a>
           <button
             onClick={onContactClick}

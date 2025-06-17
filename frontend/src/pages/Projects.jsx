@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import intelliprepImg from "../assets/intelliprep.png";
-import nutrigenieImg from "../assets/nutrigenie.png";
-import rentsphereImg from "../assets/rentsphere.png";
+import intelliprepImg from "../assets/intelliprep.jpg";
+import nutrigenieImg from "../assets/nutrigenie.jpg";
+import rentsphereImg from "../assets/rentsphere.jpg";
 
 const projects = [
   {
@@ -68,7 +68,6 @@ export default function Projects() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
         className="font-script text-4xl md:text-5xl text-accent mb-12 text-center"
-        style={{ fontFamily: "Pacifico, cursive" }}
       >
         Projects
       </motion.h2>

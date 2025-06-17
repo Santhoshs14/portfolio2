@@ -82,7 +82,6 @@ export default function Skills() {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="font-script text-4xl md:text-5xl text-accent mb-6 relative z-10"
-        style={{ fontFamily: "Pacifico, cursive" }}
       >
         Skills
       </motion.h2>

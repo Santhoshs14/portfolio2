@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  FaEnvelope,
-  FaDownload,
-  FaCloud,
-  FaRobot,
-  FaJava,
-  FaPython,
-  FaUserGraduate,
-} from "react-icons/fa";
-import { SiMongodb, SiReact } from "react-icons/si";
+import { FaEnvelope, FaDownload, FaCloud } from "react-icons/fa";
 import { Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
@@ -79,39 +70,10 @@ export default function About({ onContactClick }) {
     },
   };
 
-  // Timeline data (customized)
-  const timeline = [
-    {
-      year: "2022",
-      icon: <FaUserGraduate className="text-accent" size={22} />,
-      text: "Started college at Chennai Institute of Technology.",
-    },
-    {
-      year: "2023 (Apr–Jul)",
-      icon: <FaCloud className="text-blue-400" size={22} />,
-      text: "Software Tester Intern at Niraltek Solutions.",
-    },
-    {
-      year: "2023 (Nov–Jan)",
-      icon: <SiReact className="text-cyan-400" size={22} />,
-      text: "Frontend Developer Intern at Getmax Solutions.",
-    },
-    {
-      year: "2023 (Dec)",
-      icon: <SiMongodb className="text-green-600" size={22} />,
-      text: "Full Stack Intern at Flowtrik Technologies.",
-    },
-    {
-      year: "2024–Now",
-      icon: <FaRobot className="text-yellow-500" size={22} />,
-      text: "Preparing for SDE roles.",
-    },
-  ];
-
   return (
     <section
       id="about"
-      className="relative min-h-[105vh] flex flex-col items-center py-14 bg-primary dark:bg-dark transition-colors duration-500 overflow-hidden"
+      className="relative min-h-[70vh] flex flex-col items-center py-14 bg-primary dark:bg-dark transition-colors duration-500 overflow-hidden"
     >
       {/* Animated gradient accent background */}
       <div className="absolute inset-0 -z-20 animate-gradient bg-gradient-to-tr from-[#13adc7]/15 via-[#e1bee7]/10 to-[#ffd6e0]/15" />
@@ -138,10 +100,7 @@ export default function About({ onContactClick }) {
           >
             👨‍💻
           </motion.div>
-          <div
-            className="text-accent font-bold text-2xl font-script"
-            style={{ fontFamily: "Pacifico, cursive" }}
-          >
+          <div className="text-accent font-bold text-2xl font-script">
             Santhosh
           </div>
           <div className="text-xs bg-accent/10 rounded-full px-3 py-1 text-accent mt-1 font-semibold">
@@ -185,13 +144,40 @@ export default function About({ onContactClick }) {
         </div>
       </motion.div>
 
+      {/* About Me Paragraph */}
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.85, delay: 0.15 }}
+        className="max-w-2xl text-center text-lg md:text-xl text-dark dark:text-primary font-semibold bg-white/80 dark:bg-[#22253f]/90 p-8 rounded-2xl shadow-lg border border-accent/20 hover:scale-[1.02] transition"
+      >
+        Hi, I’m <span className="text-accent font-bold">Santhosh</span>—a
+        passionate software developer who loves building full stack apps that
+        solve real problems. I work with technologies like{" "}
+        <span className="text-cyan-500 font-bold">Next.js</span>,{" "}
+        <span className="text-cyan-500 font-bold">React</span>,{" "}
+        <span className="text-green-500 font-bold">Node.js</span>, and{" "}
+        <span className="text-yellow-500 font-bold">JavaScript</span>, and I
+        thrive on challenges in AI, cloud, and backend. Whether it’s optimizing
+        code, collaborating with teams, or exploring the latest in ML and LLMs,
+        I’m always ready to learn and create. If you have an exciting project or
+        idea,{" "}
+        <button
+          onClick={onContactClick}
+          className="text-accent underline hover:text-accent/80 font-bold transition"
+        >
+          let’s connect!
+        </button>
+      </motion.p>
+
       {/* Skills Radar Chart */}
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-xl bg-white/90 dark:bg-[#22253f]/85 rounded-2xl shadow-lg border border-accent/20 p-6 mb-12 glass-card"
+        className="w-full max-w-xl bg-white/90 dark:bg-[#22253f]/85 rounded-2xl shadow-lg border border-accent/20 p-6 mt-14 glass-card"
       >
         <h3 className="text-accent text-xl font-bold mb-2 flex items-center gap-2">
           <span>
@@ -200,37 +186,6 @@ export default function About({ onContactClick }) {
           Skill Radar
         </h3>
         <Radar data={chartData} options={chartOptions} />
-      </motion.div>
-
-      {/* Timeline */}
-      <motion.div
-        initial={{ opacity: 0, x: -40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9 }}
-        className="w-full max-w-3xl mb-11"
-      >
-        <h3 className="text-accent text-xl font-bold mb-4 flex items-center gap-2">
-          <span>
-            <FaUserGraduate />
-          </span>{" "}
-          My Journey
-        </h3>
-        <div className="flex flex-col gap-5">
-          {timeline.map((item, idx) => (
-            <motion.div
-              key={item.year}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.09, duration: 0.55 }}
-              className="flex items-center gap-3 p-4 bg-white/75 dark:bg-[#191d24]/75 rounded-xl shadow border-l-4 border-accent"
-            >
-              <span>{item.icon}</span>
-              <span className="font-bold text-accent w-24">{item.year}</span>
-              <span className="text-dark dark:text-primary">{item.text}</span>
-            </motion.div>
-          ))}
-        </div>
       </motion.div>
     </section>
   );

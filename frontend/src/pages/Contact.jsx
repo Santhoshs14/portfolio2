@@ -36,7 +36,6 @@ export default function Contact({ onSubmitted }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="font-script text-3xl md:text-4xl text-accent mb-8 text-center"
-        style={{ fontFamily: "Pacifico, cursive" }}
       >
         Contact
       </motion.h2>

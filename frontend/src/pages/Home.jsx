@@ -101,8 +101,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2 }}
-            className="text-5xl md:text-6xl font-script font-bold mb-6 tracking-tight text-accent dark:text-[#ffd6e0] drop-shadow-lg text-center"
-            style={{ fontFamily: "'Pacifico', cursive" }}
+            className="text-5xl md:text-6xl font-script font-bold mb-6 tracking-tight text-accent dark:text-[#6bb4f8] drop-shadow-lg text-center"
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Hi, I'm Santhosh!{" "}
             <span className="inline-block animate-bounce">👋</span>
